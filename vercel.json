@@ -1,13 +1,23 @@
 {
   "version": 2,
-  "outputDirectory": "public",
-  "functions": {
-    "api/deploy.js": {
-      "runtime": "@vercel/node@3"
+  "builds": [
+    {
+      "src": "public/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/deploy.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
-    { "src": "/api/deploy", "dest": "/api/deploy.js" },
-    { "src": "/(.*)", "dest": "/$1" }
+    {
+      "src": "/api/deploy",
+      "dest": "/api/deploy.js"
+    },
+    {
+      "src": "/",
+      "dest": "/public/index.html"
+    }
   ]
 }
